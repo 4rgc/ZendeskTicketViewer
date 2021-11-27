@@ -1,0 +1,16 @@
+header {
+	display: flex;
+	height: 60px;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(252, 255, 254, 0.9);
+}
+
+.header-text {
+	color: #6b0504;
+	display: inline-block;
+	font-size: 2rem;
+	font-weight: 800;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}
