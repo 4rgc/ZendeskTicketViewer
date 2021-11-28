@@ -1,4 +1,7 @@
+import { MouseEvent, useState } from 'react';
+import { Column } from 'react-table';
 import useSWR from 'swr';
+import { ZendeskTicket } from '../types/ZendeskTicket';
 import './App.css';
 import Header from './Header/Header';
 import Table from './Table/Table';
@@ -9,9 +12,15 @@ function App() {
 	const apiUrl =
 		'http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?limit=5';
 
-	const { data, error } = useSWR(apiUrl, fetcher);
+	const { data, error } = useSWR<{
+		tickets?: ZendeskTicket[];
+		error?: string;
+	}>(apiUrl, fetcher);
+	const [selectedTicket, setSelectedTicket] = useState<ZendeskTicket | null>(
+		null
+	);
 
-	const tableHeaders = [
+	const tableHeaders: Column<Partial<ZendeskTicket>>[] = [
 		{
 			Header: 'Subject',
 			accessor: 'subject',
@@ -30,6 +39,13 @@ function App() {
 		},
 	];
 
+	const onRowClick = (
+		event: MouseEvent<HTMLTableRowElement>,
+		ticket: ZendeskTicket
+	) => {
+		setSelectedTicket(ticket);
+	};
+
 	return (
 		<div className="App">
 			<Header />
@@ -39,6 +55,7 @@ function App() {
 						data && !data.error && data.tickets ? data.tickets : []
 					}
 				columns={tableHeaders}
+					onRowClick={onRowClick}
 			/>
 			</div>
 			{error && <div>Error: {error}</div>}
