@@ -34,6 +34,7 @@ function App() {
 		<div className="App">
 			<Header />
 			<Table data={data ? data.tickets : []} columns={tableHeaders} />
+			{error && <div>Error: {error}</div>}
 		</div>
 	);
 }
