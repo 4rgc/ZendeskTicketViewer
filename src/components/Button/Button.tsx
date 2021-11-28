@@ -36,7 +36,6 @@ export const Button: React.FC<ButtonProps> = ({
 			buttonClass += ' btn-sm';
 			break;
 		case 'medium':
-			console.log('this is a medium button');
 			buttonClass += ' btn-md';
 			break;
 		case 'large':

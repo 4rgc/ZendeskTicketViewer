@@ -17,8 +17,6 @@ export const TicketDetails: React.FC<TicketDetailsProps> = ({
 		);
 	};
 
-	console.log(ticket);
-
 	return (
 		<div className="tktdet-cont">
 			<div className="tktdet-head">
