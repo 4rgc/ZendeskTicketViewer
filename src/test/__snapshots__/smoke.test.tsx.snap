@@ -13,42 +13,46 @@ exports[`App smoke test opens up 1`] = `
       Great ticket viewer
     </div>
   </header>
-  <table
-    role="table"
+  <div
+    className="table-container"
   >
-    <thead>
-      <tr
-        role="row"
-      >
-        <th
-          colSpan={1}
-          role="columnheader"
+    <table
+      role="table"
+    >
+      <thead>
+        <tr
+          role="row"
         >
-          Subject
-        </th>
-        <th
-          colSpan={1}
-          role="columnheader"
-        >
-          Status
-        </th>
-        <th
-          colSpan={1}
-          role="columnheader"
-        >
-          Created At
-        </th>
-        <th
-          colSpan={1}
-          role="columnheader"
-        >
-          Updated At
-        </th>
-      </tr>
-    </thead>
-    <tbody
-      role="rowgroup"
-    />
-  </table>
+          <th
+            colSpan={1}
+            role="columnheader"
+          >
+            Subject
+          </th>
+          <th
+            colSpan={1}
+            role="columnheader"
+          >
+            Status
+          </th>
+          <th
+            colSpan={1}
+            role="columnheader"
+          >
+            Created At
+          </th>
+          <th
+            colSpan={1}
+            role="columnheader"
+          >
+            Updated At
+          </th>
+        </tr>
+      </thead>
+      <tbody
+        role="rowgroup"
+      />
+    </table>
+  </div>
 </div>
 `;
