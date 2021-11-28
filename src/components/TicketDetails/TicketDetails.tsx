@@ -17,7 +17,9 @@ export const TicketDetails: React.FC<TicketDetailsProps> = ({
 		);
 	};
 
-	return (
+	const shouldDisplayTicket = !!ticket.subject;
+
+	return shouldDisplayTicket ? (
 		<div className="tktdet-cont">
 			<div className="tktdet-head">
 				<h1 className="tktdet-subj">{ticket.subject}</h1>
@@ -52,6 +54,10 @@ export const TicketDetails: React.FC<TicketDetailsProps> = ({
 					View on Zendesk
 				</Button>
 			</div>
+		</div>
+	) : (
+		<div className="tktdet-cont">
+			<div className="tktdet-empty">No ticket selected.</div>
 		</div>
 	);
 };

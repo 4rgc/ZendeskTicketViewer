@@ -38,7 +38,8 @@
 	text-align: left;
 }
 
-.tktdet-lb {
+.tktdet-lb,
+.tktdet-empty {
 	font-size: small;
 	font-style: italic;
 	color: rgba(211, 211, 211, 0.9);
@@ -70,4 +71,10 @@
 .tktdet-view-on-zendesk-btn {
 	margin-left: auto;
 	float: left;
+}
+
+.tktdet-empty {
+	font-size: medium;
+	margin: auto;
+	text-align: center;
 }
