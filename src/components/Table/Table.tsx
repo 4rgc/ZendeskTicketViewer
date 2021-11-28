@@ -1,15 +1,20 @@
-import { PropsWithChildren } from 'react';
+import { MouseEvent, PropsWithChildren } from 'react';
 import { Column, useTable } from 'react-table';
 import './Table.css';
 
 interface TableProps<T extends object> {
 	columns: Column<T>[];
 	data: T[];
+	onRowClick?: (
+		event: MouseEvent<HTMLTableRowElement>,
+		original: object
+	) => void;
 }
 
 function Table<T extends object>({
 	columns,
 	data,
+	onRowClick = () => {},
 }: PropsWithChildren<TableProps<T>>) {
 	const tableInstance = useTable({ columns, data });
 
@@ -33,7 +38,10 @@ function Table<T extends object>({
 				{rows.map((row) => {
 					prepareRow(row);
 					return (
-						<tr {...row.getRowProps()}>
+						<tr
+							{...row.getRowProps()}
+							onClick={(event) => onRowClick(event, row.original)}
+						>
 							{row.cells.map((cell) => {
 								return (
 									<td {...cell.getCellProps()}>

@@ -6,6 +6,7 @@ import Table from './Table';
 export default {
 	title: 'Components/Table',
 	component: Table,
+	argTypes: { onRowClick: { action: 'row clicked' } },
 } as ComponentMeta<typeof Table>;
 
 type MockDataType = { hello: number; world: number };
@@ -28,18 +29,26 @@ const mockData: MockDataType[] = [
 	{ hello: 10, world: 11 },
 ];
 
-export const Empty: ComponentStory<typeof Table> = () => (
-	<Table data={[]} columns={[]} />
-);
+export const Empty: ComponentStory<typeof Table> = ({
+	data,
+	columns,
+	...args
+}) => <Table data={[]} columns={[]} {...args} />;
 
-export const HeaderOnly: ComponentStory<typeof Table> = () => (
-	<Table columns={mockColumns} data={[]} />
-);
+export const HeaderOnly: ComponentStory<typeof Table> = ({
+	data,
+	columns,
+	...args
+}) => <Table columns={mockColumns} data={[]} {...args} />;
 
-export const OneRow: ComponentStory<typeof Table> = () => (
-	<Table columns={mockColumns} data={mockData.slice(0, 1)} />
-);
+export const OneRow: ComponentStory<typeof Table> = ({
+	data,
+	columns,
+	...args
+}) => <Table columns={mockColumns} data={mockData.slice(0, 1)} {...args} />;
 
-export const TenRows: ComponentStory<typeof Table> = () => (
-	<Table columns={mockColumns} data={mockData} />
-);
+export const TenRows: ComponentStory<typeof Table> = ({
+	data,
+	columns,
+	...args
+}) => <Table columns={mockColumns} data={mockData} {...args} />;
