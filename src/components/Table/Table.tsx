@@ -3,12 +3,9 @@ import { Column, useTable } from 'react-table';
 import './Table.css';
 
 interface TableProps<T extends object> {
-	columns: Column<T>[];
 	data: T[];
-	onRowClick?: (
-		event: MouseEvent<HTMLTableRowElement>,
-		original: object
-	) => void;
+	columns: Column<Partial<T>>[];
+	onRowClick?: (event: MouseEvent<HTMLTableRowElement>, original: T) => void;
 }
 
 function Table<T extends object>({

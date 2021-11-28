@@ -11,7 +11,7 @@ export default {
 
 type MockDataType = { hello: number; world: number };
 
-const mockColumns: Column<MockDataType>[] = [
+const mockColumns: Column<Partial<MockDataType>>[] = [
 	{ Header: 'hello', accessor: 'hello' },
 	{ Header: 'world', accessor: 'world' },
 ];
