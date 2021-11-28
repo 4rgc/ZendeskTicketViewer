@@ -1,20 +1,25 @@
 import './Button.css';
 
-export interface ButtonProps {
-	size: 'small' | 'medium' | 'large';
-	type: 'primary' | 'secondary';
-	onClick: () => void;
-}
+export type ButtonProps = {
+	size?: 'small' | 'medium' | 'large';
+	kind?: 'primary' | 'secondary';
+	onClick?: () => void;
+	children: React.ReactChild | React.ReactChild[];
+	props: React.ComponentPropsWithoutRef<'button'>;
+};
 
 export const Button: React.FC<ButtonProps> = ({
 	size = 'medium',
-	type = 'primary',
+	kind = 'primary',
 	children,
 	onClick = () => {},
+	props,
 }) => {
+	const { className, ...restOfProps } = props;
+
 	let buttonClass = 'btn-base';
 
-	switch (type) {
+	switch (kind) {
 		case 'primary':
 			buttonClass += ' btn-prm';
 			break;
@@ -35,8 +40,10 @@ export const Button: React.FC<ButtonProps> = ({
 			break;
 	}
 
+	buttonClass += className && ` ${className}`;
+
 	return (
-		<button className={buttonClass} onClick={onClick}>
+		<button className={buttonClass} onClick={onClick} {...restOfProps}>
 			{children}
 		</button>
 	);

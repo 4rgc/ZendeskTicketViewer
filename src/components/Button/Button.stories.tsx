@@ -25,7 +25,7 @@ export const Large = Template.bind({});
 Large.args = { size: 'large', children: 'Large Button !!!' };
 
 export const Primary = Template.bind({});
-Primary.args = { type: 'primary', children: 'Primary' };
+Primary.args = { kind: 'primary', children: 'Primary' };
 
 export const Secondary = Template.bind({});
-Secondary.args = { type: 'secondary', children: 'Secondary' };
+Secondary.args = { kind: 'secondary', children: 'Secondary' };
