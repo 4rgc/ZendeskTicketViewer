@@ -6,6 +6,7 @@
     "dotenv": "^8.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "swr": "^1.0.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
@@ -61,9 +62,11 @@
     "@types/node": "^12.20.37",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
+    "@types/react-table": "^7.7.8",
     "@types/react-test-renderer": "^17.0.1",
     "babel-jest": "^26.6.3",
     "react-scripts": "4.0.3",
+    "react-table": "^7.7.0",
     "react-test-renderer": "^17.0.2",
     "typescript": "^4.5.2"
   }
