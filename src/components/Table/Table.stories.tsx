@@ -52,3 +52,18 @@ export const TenRows: ComponentStory<typeof Table> = ({
 	columns,
 	...args
 }) => <Table columns={mockColumns} data={mockData} {...args} />;
+
+export const FiveRowsWithClickHandler: ComponentStory<typeof Table> = ({
+	data,
+	columns,
+	...args
+}) => (
+	<Table
+		{...args}
+		columns={mockColumns}
+		data={mockData.slice(0, 5)}
+		onRowClick={(e, data) => {
+			console.log(data);
+		}}
+	/>
+);
