@@ -1,0 +1,73 @@
+.tktdet-cont {
+	color: white;
+	background-color: rgba(202, 144, 126, 0.3);
+	padding: 10px 30px;
+	text-align: left;
+	animation: fadeIn 0.5s;
+	height: max-content;
+	flex: 1;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.tktdet-head {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.tktdet-status {
+	margin-left: 10px;
+	margin-right: 50px;
+}
+
+.tktdet-close-btn {
+	margin-left: auto;
+}
+
+.tktdet-desc {
+	font-size: large;
+	margin: 8px 0;
+	text-align: left;
+}
+
+.tktdet-lb {
+	font-size: small;
+	font-style: italic;
+	color: rgba(211, 211, 211, 0.9);
+}
+
+.tktdet-foot {
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+}
+
+.tktdet-foot-wrap {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tktdet-updated-cont,
+.tktdet-created-cont {
+	flex: 1;
+	margin-top: 10px;
+	margin-right: 20px;
+}
+
+.tktdet-created,
+.tktdet-updated {
+	margin: 0;
+}
+
+.tktdet-view-on-zendesk-btn {
+	margin-left: auto;
+	float: left;
+}
