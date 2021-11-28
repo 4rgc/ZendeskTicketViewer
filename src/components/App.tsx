@@ -33,7 +33,10 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
-			<Table data={data ? data.tickets : []} columns={tableHeaders} />
+			<Table
+				data={data && !data.error ? data.tickets : []}
+				columns={tableHeaders}
+			/>
 			{error && <div>Error: {error}</div>}
 		</div>
 	);
