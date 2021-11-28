@@ -21,17 +21,17 @@
 }
 
 .btn-sq {
-	width: 40px;
+	min-width: 40px;
 }
 
 .btn-sm {
-	width: 80px;
+	min-width: 80px;
 }
 
 .btn-md {
-	width: 140px;
+	min-width: 140px;
 }
 
 .btn-lg {
-	width: 200px;
+	min-width: 200px;
 }
