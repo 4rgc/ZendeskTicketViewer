@@ -5,12 +5,13 @@ import { ZendeskTicket } from '../types/ZendeskTicket';
 import './App.css';
 import Header from './Header/Header';
 import Table from './Table/Table';
+import { TicketDetails } from './TicketDetails/TicketDetails';
 
 const fetcher = (input: RequestInfo) => fetch(input).then((res) => res.json());
 
 function App() {
 	const apiUrl =
-		'http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?limit=5';
+		'http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?limit=25';
 
 	const { data, error } = useSWR<{
 		tickets?: ZendeskTicket[];
@@ -46,18 +47,28 @@ function App() {
 		setSelectedTicket(ticket);
 	};
 
+	const onTicketDetailsClose = () => {
+		setSelectedTicket(null);
+	};
+
 	return (
 		<div className="App">
 			<Header />
 			<div className="table-container">
-			<Table
+				<Table
 					data={
 						data && !data.error && data.tickets ? data.tickets : []
 					}
-				columns={tableHeaders}
+					columns={tableHeaders}
 					onRowClick={onRowClick}
-			/>
+				/>
 			</div>
+			{selectedTicket && (
+				<TicketDetails
+					ticket={selectedTicket}
+					onClose={onTicketDetailsClose}
+				/>
+			)}
 			{error && <div>Error: {error}</div>}
 		</div>
 	);
