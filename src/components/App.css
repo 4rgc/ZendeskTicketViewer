@@ -1,9 +1,18 @@
 .App {
 	text-align: center;
-	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 	background-color: #001514;
 }
 
 .App-link {
 	color: #61dafb;
+}
+
+.table-container {
+	flex: 1;
+	overflow-y: scroll;
+	padding: 20px;
+	align-items: center;
 }

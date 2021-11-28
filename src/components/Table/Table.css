@@ -1,7 +1,7 @@
 table {
 	color: white;
-	margin: 20px auto;
-	width: 800px;
+	margin: auto;
+	max-width: 800px;
 }
 
 table th,
@@ -30,6 +30,7 @@ table:hover tr:last-child:hover td:last-child {
 
 table tr {
 	transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+	height: 40px;
 }
 
 table tbody tr:hover {
