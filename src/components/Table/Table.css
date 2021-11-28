@@ -19,9 +19,21 @@ table thead tr th:last-child {
 	border-top-right-radius: 5px;
 }
 
-table tr:last-child td:first-child {
+table tr:last-child td:first-child,
+table:hover tr:last-child:hover td:first-child {
 	border-bottom-left-radius: 5px;
 }
-table tr:last-of-type td:last-child {
+table tr:last-child td:last-child,
+table:hover tr:last-child:hover td:last-child {
 	border-bottom-right-radius: 5px;
+}
+
+table tr {
+	transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+table tbody tr:hover {
+	cursor: pointer;
+	background-color: rgba(230, 175, 46, 1);
+	transform: scale(1.05);
 }
