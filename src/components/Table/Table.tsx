@@ -1,9 +1,9 @@
 import { PropsWithChildren } from 'react';
-import { useTable } from 'react-table';
-import './table.css';
+import { Column, useTable } from 'react-table';
+import './Table.css';
 
 interface TableProps<T extends object> {
-	columns: { Header: string; accessor: keyof T }[];
+	columns: Column<T>[];
 	data: T[];
 }
 

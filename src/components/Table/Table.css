@@ -1,0 +1,27 @@
+table {
+	color: white;
+	margin: 20px auto;
+	width: 800px;
+}
+
+table th,
+table td {
+	padding: 8px;
+	border: 5px transparent;
+	background-color: rgba(230, 175, 46, 0.8);
+}
+
+table thead tr th:first-child {
+	border-top-left-radius: 5px;
+}
+
+table thead tr th:last-child {
+	border-top-right-radius: 5px;
+}
+
+table tr:last-child td:first-child {
+	border-bottom-left-radius: 5px;
+}
+table tr:last-of-type td:last-child {
+	border-bottom-right-radius: 5px;
+}
