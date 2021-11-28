@@ -15,6 +15,9 @@ const Template: ComponentStory<typeof Button> = ({ children, ...args }) => (
 
 export const Default = Template.bind({});
 
+export const Square = Template.bind({});
+Square.args = { size: 'square', children: 'OK' };
+
 export const Small = Template.bind({});
 Small.args = { size: 'small', children: 'Small' };
 

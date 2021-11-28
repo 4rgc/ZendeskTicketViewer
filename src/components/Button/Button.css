@@ -20,6 +20,10 @@
 	background-color: rgba(251, 255, 254, 0.4);
 }
 
+.btn-sq {
+	width: 40px;
+}
+
 .btn-sm {
 	width: 80px;
 }

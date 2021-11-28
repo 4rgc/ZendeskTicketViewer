@@ -1,7 +1,7 @@
 import './Button.css';
 
 export type ButtonProps = {
-	size?: 'small' | 'medium' | 'large';
+	size?: 'square' | 'small' | 'medium' | 'large';
 	kind?: 'primary' | 'secondary';
 	onClick?: () => void;
 	children: React.ReactChild | React.ReactChild[];
@@ -13,7 +13,7 @@ export const Button: React.FC<ButtonProps> = ({
 	kind = 'primary',
 	children,
 	onClick = () => {},
-	props,
+	props = {},
 }) => {
 	const { className, ...restOfProps } = props;
 
@@ -29,10 +29,14 @@ export const Button: React.FC<ButtonProps> = ({
 	}
 
 	switch (size) {
+		case 'square':
+			buttonClass += ' btn-sq';
+			break;
 		case 'small':
 			buttonClass += ' btn-sm';
 			break;
 		case 'medium':
+			console.log('this is a medium button');
 			buttonClass += ' btn-md';
 			break;
 		case 'large':
@@ -40,7 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
 			break;
 	}
 
-	buttonClass += className && ` ${className}`;
+	buttonClass += className ? ` ${className}` : '';
 
 	return (
 		<button className={buttonClass} onClick={onClick} {...restOfProps}>
