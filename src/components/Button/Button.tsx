@@ -3,6 +3,7 @@ import './Button.css';
 export type ButtonProps = {
 	size?: 'square' | 'small' | 'medium' | 'large';
 	kind?: 'primary' | 'secondary';
+	disabled?: boolean;
 	onClick?: () => void;
 	children: React.ReactChild | React.ReactChild[];
 	props: React.ComponentPropsWithoutRef<'button'>;
@@ -11,6 +12,7 @@ export type ButtonProps = {
 export const Button: React.FC<ButtonProps> = ({
 	size = 'medium',
 	kind = 'primary',
+	disabled = false,
 	children,
 	onClick = () => {},
 	props = {},
@@ -41,6 +43,10 @@ export const Button: React.FC<ButtonProps> = ({
 		case 'large':
 			buttonClass += ' btn-lg';
 			break;
+	}
+
+	if (disabled) {
+		buttonClass += ' btn-dis';
 	}
 
 	buttonClass += className ? ` ${className}` : '';

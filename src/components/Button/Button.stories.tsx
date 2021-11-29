@@ -32,3 +32,6 @@ Primary.args = { kind: 'primary', children: 'Primary' };
 
 export const Secondary = Template.bind({});
 Secondary.args = { kind: 'secondary', children: 'Secondary' };
+
+export const Disabled = Template.bind({});
+Disabled.args = { disabled: true, children: 'disabled' };
