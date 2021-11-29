@@ -1,6 +1,5 @@
 import { MouseEvent, useEffect, useState } from 'react';
 import { Column } from 'react-table';
-import useSWR from 'swr';
 import { ZendeskTicket } from '../types/ZendeskTicket';
 import './App.css';
 import Header from './Header/Header';
@@ -10,61 +9,38 @@ import _ from 'lodash';
 import moment from 'moment';
 import { ErrorView } from './ErrorView/ErrorView';
 import { Paging } from './Paging/Paging';
-import { fetcher, FetcherError } from '../util/fetcher';
-
-type APIResponse = {
-	tickets?: ZendeskTicket[];
-	totalCount?: number;
-	error?: string;
-};
+import useZendeskAPI, { APIResponse } from '../hooks/useZendeskAPI';
+import usePagination from '../hooks/usePagination';
 
 function App() {
-	const apiUrl =
-		'http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?limit=25&page=';
-
+	const ticketsPerPage = 25;
+	const [{ page, pageCount }, setPage, setPageCount] = usePagination(0, 0);
+	const [data, error] = useZendeskAPI(page, ticketsPerPage);
 	const [displayData, setDisplayData] = useState<APIResponse['tickets']>();
-	const [apiError, setApiError] = useState<string>('');
-	const [page, setPage] = useState<number>(0);
-	const [pageCount, setPageCount] = useState<number>(0);
 	const [selectedTicket, setSelectedTicket] = useState<ZendeskTicket | null>(
 		null
 	);
-	const { data, error } = useSWR<APIResponse, FetcherError>(
-		`${apiUrl}${page}`,
-		fetcher
-	);
-	const perPage = 25;
 
 	useEffect(() => {
 		if (data) {
 			const tickets = data.tickets;
 			if (tickets) {
-				const clonedTickets = _.cloneDeep(tickets);
-				clonedTickets.forEach((ticket) => {
-					ticket.created_at = moment(ticket.created_at).calendar();
-					ticket.updated_at = moment(ticket.updated_at).calendar();
-				});
-				setDisplayData(clonedTickets);
+				const formatted = formatForDisplay(tickets);
+				setDisplayData(formatted);
 				if (data.totalCount)
-					setPageCount(Math.ceil(data.totalCount / perPage));
-			}
-			if (data.error) {
-				setApiError(data.error);
-			} else {
-				setApiError('');
+					setPageCount(Math.ceil(data.totalCount / ticketsPerPage));
 			}
 		}
-	}, [data]);
+	}, [data, setPageCount]);
 
-	useEffect(() => {
-		if (error) {
-			setApiError(
-				`${error.status}: ${error.message}. ${error.info?.error}`
-			);
-		} else {
-			setApiError('');
-		}
-	}, [error]);
+	const formatForDisplay = (tickets: ZendeskTicket[]) => {
+		const clonedTickets = _.cloneDeep(tickets);
+		clonedTickets.forEach((ticket) => {
+			ticket.created_at = moment(ticket.created_at).calendar();
+			ticket.updated_at = moment(ticket.updated_at).calendar();
+		});
+		return clonedTickets;
+	};
 
 	const tableHeaders: Column<Partial<ZendeskTicket>>[] = [
 		{
@@ -103,9 +79,7 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
-			{apiError !== '' ? (
-				<ErrorView type="error" message={apiError} />
-			) : null}
+			{error !== '' ? <ErrorView type="error" message={error} /> : null}
 			<div className="table-container">
 				<Table
 					data={displayData ? displayData : []}
@@ -113,7 +87,7 @@ function App() {
 					onRowClick={onRowClick}
 				/>
 			</div>
-			{!apiError ? (
+			{!error ? (
 				<Paging
 					size="small"
 					page={page}
