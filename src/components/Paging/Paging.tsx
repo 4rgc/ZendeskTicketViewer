@@ -30,7 +30,7 @@ export const Paging: React.FC<PagingProps> = ({
 			break;
 	}
 
-	const maxPage = pageCount - 1;
+	const maxPage = pageCount ? pageCount - 1 : 0;
 
 	let pageButtons = [];
 	if (pageCount <= pageButtonNumber) {
@@ -62,6 +62,7 @@ export const Paging: React.FC<PagingProps> = ({
 					size="square"
 					onClick={onPrevSelected}
 					props={{ className: 'paging-btn' }}
+					disabled={page === 0}
 				>
 					{'<'}
 				</Button>
@@ -81,6 +82,7 @@ export const Paging: React.FC<PagingProps> = ({
 					size="square"
 					onClick={onNextSelected}
 					props={{ className: 'paging-btn' }}
+					disabled={page === maxPage}
 				>
 					{'>'}
 				</Button>
