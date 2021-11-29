@@ -13,10 +13,7 @@ const useZendeskAPI = ({ page, limit }: { page: number; limit: number }) => {
 	const apiUrl = `http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?limit=${limit}&page=${page}`;
 
 	const [apiError, setApiError] = useState<string>('');
-	const { data, error } = useSWR<APIResponse, FetcherError>(
-		`${apiUrl}${page}`,
-		fetcher
-	);
+	const { data, error } = useSWR<APIResponse, FetcherError>(apiUrl, fetcher);
 
 	useEffect(() => {
 		if (error) {
