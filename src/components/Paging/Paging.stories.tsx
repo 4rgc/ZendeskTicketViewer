@@ -14,6 +14,9 @@ export default {
 
 const Template: ComponentStory<typeof Paging> = (args) => <Paging {...args} />;
 
+export const NoPages = Template.bind({});
+NoPages.args = { pageCount: 0, page: 0, showPrevNext: false };
+
 export const OnePage = Template.bind({});
 OnePage.args = { pageCount: 1, page: 0, showPrevNext: false };
 
