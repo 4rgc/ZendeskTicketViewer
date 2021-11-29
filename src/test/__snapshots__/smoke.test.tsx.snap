@@ -58,13 +58,13 @@ exports[`App smoke test opens up 1`] = `
     className="paging-cont"
   >
     <button
-      className="btn-base btn-prm btn-sq paging-btn"
+      className="btn-base btn-prm btn-sq btn-dis paging-btn"
       onClick={[Function]}
     >
       &lt;
     </button>
     <button
-      className="btn-base btn-prm btn-sq paging-btn"
+      className="btn-base btn-prm btn-sq btn-dis paging-btn"
       onClick={[Function]}
     >
       &gt;
