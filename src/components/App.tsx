@@ -10,35 +10,7 @@ import _ from 'lodash';
 import moment from 'moment';
 import { ErrorView } from './ErrorView/ErrorView';
 import { Paging } from './Paging/Paging';
-
-class FetcherError extends Error {
-	info?: { error: string };
-	status?: number;
-}
-
-const fetcher = (url: RequestInfo) => {
-	return fetch(url)
-		.then(async (res) => {
-			// If the status code is not in the range 200-299,
-			// we still try to parse and throw it.
-			if (!res.ok) {
-				const error = new FetcherError(
-					'An error occurred while fetching the data'
-				);
-				// Attach extra info to the error object.
-				error.info = await res.json();
-				error.status = res.status;
-				throw error;
-			}
-
-			return res.json();
-		})
-		.catch((err) => {
-			throw err;
-		});
-};
-
-// const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
+import { fetcher, FetcherError } from '../util/fetcher';
 
 type APIResponse = {
 	tickets?: ZendeskTicket[];
