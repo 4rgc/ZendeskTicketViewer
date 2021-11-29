@@ -9,6 +9,7 @@ import { TicketDetails } from './TicketDetails/TicketDetails';
 import _ from 'lodash';
 import moment from 'moment';
 import { ErrorView } from './ErrorView/ErrorView';
+import { Paging } from './Paging/Paging';
 
 class FetcherError extends Error {
 	info?: { error: string };
@@ -41,19 +42,26 @@ const fetcher = (url: RequestInfo) => {
 
 type APIResponse = {
 	tickets?: ZendeskTicket[];
+	totalCount?: number;
 	error?: string;
 };
 
 function App() {
 	const apiUrl =
-		'http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?limit=10';
+		'http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?limit=25&page=';
 
-	const { data, error } = useSWR<APIResponse, FetcherError>(apiUrl, fetcher);
 	const [displayData, setDisplayData] = useState<APIResponse['tickets']>();
 	const [apiError, setApiError] = useState<string>('');
+	const [page, setPage] = useState<number>(0);
+	const [pageCount, setPageCount] = useState<number>(0);
 	const [selectedTicket, setSelectedTicket] = useState<ZendeskTicket | null>(
 		null
 	);
+	const { data, error } = useSWR<APIResponse, FetcherError>(
+		`${apiUrl}${page}`,
+		fetcher
+	);
+	const perPage = 25;
 
 	useEffect(() => {
 		if (data) {
@@ -65,9 +73,13 @@ function App() {
 					ticket.updated_at = moment(ticket.updated_at).calendar();
 				});
 				setDisplayData(clonedTickets);
+				if (data.totalCount)
+					setPageCount(Math.ceil(data.totalCount / perPage));
 			}
 			if (data.error) {
 				setApiError(data.error);
+			} else {
+				setApiError('');
 			}
 		}
 	}, [data]);
@@ -77,6 +89,8 @@ function App() {
 			setApiError(
 				`${error.status}: ${error.message}. ${error.info?.error}`
 			);
+		} else {
+			setApiError('');
 		}
 	}, [error]);
 
@@ -110,6 +124,10 @@ function App() {
 		setSelectedTicket(null);
 	};
 
+	const onPageSelected = (page: number) => setPage(page);
+	const onPrevPageClicked = () => setPage(page - 1);
+	const onNextPageClicked = () => setPage(page + 1);
+
 	return (
 		<div className="App">
 			<Header />
@@ -123,6 +141,17 @@ function App() {
 					onRowClick={onRowClick}
 				/>
 			</div>
+			{!apiError ? (
+				<Paging
+					size="small"
+					page={page}
+					pageCount={pageCount}
+					showPrevNext
+					onPageSelected={onPageSelected}
+					onPrevSelected={onPrevPageClicked}
+					onNextSelected={onNextPageClicked}
+				/>
+			) : null}
 			{selectedTicket && (
 				<TicketDetails
 					ticket={selectedTicket}
