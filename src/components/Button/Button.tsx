@@ -18,6 +18,7 @@ export const Button: React.FC<ButtonProps> = ({
 	props = {},
 }) => {
 	const { className, ...restOfProps } = props;
+	const defaultClickHandler = () => {};
 
 	let buttonClass = 'btn-base';
 
@@ -52,7 +53,11 @@ export const Button: React.FC<ButtonProps> = ({
 	buttonClass += className ? ` ${className}` : '';
 
 	return (
-		<button className={buttonClass} onClick={onClick} {...restOfProps}>
+		<button
+			className={buttonClass}
+			onClick={disabled ? defaultClickHandler : onClick}
+			{...restOfProps}
+		>
 			{children}
 		</button>
 	);
