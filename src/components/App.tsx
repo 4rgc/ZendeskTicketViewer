@@ -8,8 +8,37 @@ import Table from './Table/Table';
 import { TicketDetails } from './TicketDetails/TicketDetails';
 import _ from 'lodash';
 import moment from 'moment';
+import { ErrorView } from './ErrorView/ErrorView';
 
-const fetcher = (input: RequestInfo) => fetch(input).then((res) => res.json());
+class FetcherError extends Error {
+	info?: { error: string };
+	status?: number;
+}
+
+const fetcher = (url: RequestInfo) => {
+	return fetch(url)
+		.then(async (res) => {
+			// If the status code is not in the range 200-299,
+			// we still try to parse and throw it.
+			if (!res.ok) {
+				const error = new FetcherError(
+					'An error occurred while fetching the data'
+				);
+				// Attach extra info to the error object.
+				error.info = await res.json();
+				error.status = res.status;
+				throw error;
+			}
+
+			return res.json();
+		})
+		.catch((err) => {
+			throw err;
+		});
+};
+
+// const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
+
 type APIResponse = {
 	tickets?: ZendeskTicket[];
 	error?: string;
@@ -17,10 +46,11 @@ type APIResponse = {
 
 function App() {
 	const apiUrl =
-		'http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?limit=25';
+		'http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?limit=10';
 
-	const { data, error } = useSWR<APIResponse>(apiUrl, fetcher);
+	const { data, error } = useSWR<APIResponse, FetcherError>(apiUrl, fetcher);
 	const [displayData, setDisplayData] = useState<APIResponse['tickets']>();
+	const [apiError, setApiError] = useState<string>('');
 	const [selectedTicket, setSelectedTicket] = useState<ZendeskTicket | null>(
 		null
 	);
@@ -36,8 +66,19 @@ function App() {
 				});
 				setDisplayData(clonedTickets);
 			}
+			if (data.error) {
+				setApiError(data.error);
+			}
 		}
 	}, [data]);
+
+	useEffect(() => {
+		if (error) {
+			setApiError(
+				`${error.status}: ${error.message}. ${error.info?.error}`
+			);
+		}
+	}, [error]);
 
 	const tableHeaders: Column<Partial<ZendeskTicket>>[] = [
 		{
@@ -72,6 +113,9 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
+			{apiError !== '' ? (
+				<ErrorView type="error" message={apiError} />
+			) : null}
 			<div className="table-container">
 				<Table
 					data={displayData ? displayData : []}
@@ -85,7 +129,6 @@ function App() {
 					onClose={onTicketDetailsClose}
 				/>
 			)}
-			{error && <div>Error: {error}</div>}
 		</div>
 	);
 }
