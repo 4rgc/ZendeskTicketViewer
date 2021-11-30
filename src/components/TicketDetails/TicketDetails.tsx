@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { SiteContext } from '../../contexts/SiteContext';
 import { ZendeskTicket } from '../../types/ZendeskTicket';
 import { Button } from '../Button/Button';
 import './TicketDetails.css';
@@ -11,9 +13,11 @@ export const TicketDetails: React.FC<TicketDetailsProps> = ({
 	ticket,
 	onClose,
 }) => {
+	const siteName = useContext(SiteContext);
+
 	const onViewOnZendeskClick = () => {
 		window.open(
-			`https://zccandriib.zendesk.com/agent/tickets/${ticket.id}`
+			`https://${siteName}.zendesk.com/agent/tickets/${ticket.id}`
 		);
 	};
 
