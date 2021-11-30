@@ -5,8 +5,8 @@ export type ButtonProps = {
 	kind?: 'primary' | 'secondary';
 	disabled?: boolean;
 	onClick?: () => void;
-	children: React.ReactChild | React.ReactChild[];
-	props: React.ComponentPropsWithoutRef<'button'>;
+	children?: React.ReactChild | React.ReactChild[];
+	props?: React.ComponentPropsWithoutRef<'button'>;
 };
 
 export const Button: React.FC<ButtonProps> = ({
