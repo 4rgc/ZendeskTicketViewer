@@ -1,7 +1,8 @@
 import useSWR from 'swr';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ZendeskTicket } from '../types/ZendeskTicket';
 import { fetcher, FetcherError } from '../util/fetcher';
+import { SiteContext } from '../contexts/SiteContext';
 
 export type APIResponse = {
 	tickets?: ZendeskTicket[];
@@ -13,10 +14,20 @@ const useZendeskAPI: (
 	page: number,
 	limit: number
 ) => [APIResponse | undefined, string] = (page: number, limit: number) => {
-	const apiUrl = `http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?limit=${limit}&page=${page}`;
+	const site = useContext(SiteContext);
+	const apiUrl = `http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?site=${site}&limit=${limit}&page=${page}`;
+	const auth = {
+		username: process.env.REACT_APP_USERNAME || '',
+		apiKey: process.env.REACT_APP_API_KEY || '',
+	};
+
+	const fetcherWithAuth = (apiUrl: string) => fetcher(apiUrl, auth);
 
 	const [apiError, setApiError] = useState<string>('');
-	const { data, error } = useSWR<APIResponse, FetcherError>(apiUrl, fetcher);
+	const { data, error } = useSWR<APIResponse, FetcherError>(
+		apiUrl,
+		fetcherWithAuth
+	);
 
 	useEffect(() => {
 		if (error) {
