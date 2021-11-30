@@ -37,3 +37,6 @@ TenPage.args = { pageCount: 10, page: 5, showPrevNext: false };
 
 export const SevenPageWithPrevNext = Template.bind({});
 SevenPageWithPrevNext.args = { pageCount: 7, page: 1, showPrevNext: true };
+
+export const SevenPageOnLast = Template.bind({});
+SevenPageOnLast.args = { pageCount: 7, page: 6 };
