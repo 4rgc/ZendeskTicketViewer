@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Story regression tests should render a default button 1`] = `
+<button
+  className="btn-base btn-prm btn-md"
+/>
+`;
+
+exports[`Button Story regression tests should render a disabled button 1`] = `
+<button
+  className="btn-base btn-prm btn-md btn-dis"
+  onClick={[Function]}
+>
+  disabled
+</button>
+`;
+
+exports[`Button Story regression tests should render a large button 1`] = `
+<button
+  className="btn-base btn-prm btn-lg"
+>
+  Large Button !!!
+</button>
+`;
+
+exports[`Button Story regression tests should render a medium button 1`] = `
+<button
+  className="btn-base btn-prm btn-md"
+>
+  Medium Btn
+</button>
+`;
+
+exports[`Button Story regression tests should render a primary button 1`] = `
+<button
+  className="btn-base btn-prm btn-md"
+>
+  Primary
+</button>
+`;
+
+exports[`Button Story regression tests should render a secondary button 1`] = `
+<button
+  className="btn-base btn-sec btn-md"
+>
+  Secondary
+</button>
+`;
+
+exports[`Button Story regression tests should render a small button 1`] = `
+<button
+  className="btn-base btn-prm btn-sm"
+>
+  Small
+</button>
+`;
+
+exports[`Button Story regression tests should render a square button 1`] = `
+<button
+  className="btn-base btn-prm btn-sq"
+>
+  OK
+</button>
+`;
