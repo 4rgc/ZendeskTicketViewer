@@ -71,7 +71,7 @@ export const Paging: React.FC<PagingProps> = ({
 				<Button
 					key={ind}
 					size="square"
-					onClick={p === -1 ? () => {} : () => onPageSelected(p)}
+					onClick={p === -1 ? undefined : () => onPageSelected(p)}
 					props={{ className: 'paging-btn' }}
 				>
 					{p === -1 ? '...' : p + 1}
