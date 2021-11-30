@@ -4,7 +4,7 @@ import { Button } from '../Button/Button';
 export type PagingProps = {
 	pageCount: number;
 	page: number;
-	showPrevNext: boolean;
+	showPrevNext?: boolean;
 	size: 'small' | 'large';
 	onPageSelected: (page: number) => void;
 	onNextSelected: () => void;
@@ -16,9 +16,9 @@ export const Paging: React.FC<PagingProps> = ({
 	page,
 	showPrevNext = false,
 	size = 'small',
-	onPageSelected = () => {},
-	onNextSelected = () => {},
-	onPrevSelected = () => {},
+	onPageSelected,
+	onNextSelected,
+	onPrevSelected,
 }) => {
 	let pageButtonNumber = 0;
 	switch (size) {
