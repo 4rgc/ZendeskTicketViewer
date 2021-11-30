@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import { SiteContext } from './contexts/SiteContext';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<SiteContext.Provider value={'zccandriib'}>
+			<App />
+		</SiteContext.Provider>
 	</React.StrictMode>,
 	document.getElementById('root')
 );
