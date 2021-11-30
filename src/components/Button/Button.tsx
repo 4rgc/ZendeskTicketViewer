@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = ({
 	kind = 'primary',
 	disabled = false,
 	children,
-	onClick = () => {},
+	onClick,
 	props = {},
 }) => {
 	const { className, ...restOfProps } = props;
