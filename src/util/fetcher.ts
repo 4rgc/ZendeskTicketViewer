@@ -3,8 +3,22 @@ export class FetcherError extends Error {
 	status?: number;
 }
 
-export const fetcher = (url: RequestInfo) => {
-	return fetch(url)
+export const fetcher = (
+	url: RequestInfo,
+	auth?: { username: string; apiKey: string }
+) => {
+	let init: RequestInit | undefined = undefined;
+	if (auth?.username && auth.apiKey) {
+		init = {
+			headers: {
+				Authorization:
+					'Basic ' + btoa(`${auth.username}:${auth.apiKey}`),
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+		};
+	}
+
+	return fetch(url, init)
 		.then(async (res) => {
 			// If the status code is not in the range 200-299,
 			// we still try to parse and throw it.
