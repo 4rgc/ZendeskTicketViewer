@@ -9,7 +9,7 @@ export interface TicketDetailsProps {
 
 export const TicketDetails: React.FC<TicketDetailsProps> = ({
 	ticket,
-	onClose = () => {},
+	onClose,
 }) => {
 	const onViewOnZendeskClick = () => {
 		window.open(
