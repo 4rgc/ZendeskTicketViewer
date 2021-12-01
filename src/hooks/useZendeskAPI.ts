@@ -15,7 +15,10 @@ const useZendeskAPI: (
 	limit: number
 ) => [APIResponse | undefined, string] = (page: number, limit: number) => {
 	const site = useContext(SiteContext);
-	const apiUrl = `http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080/tickets?site=${site}&limit=${limit}&page=${page}`;
+	const baseUrl = process.env.REACT_APP_USE_LOCAL_API
+		? 'localhost:3005'
+		: 'http://ec2-35-183-81-115.ca-central-1.compute.amazonaws.com:8080';
+	const apiUrl = `${baseUrl}/tickets?site=${site}&limit=${limit}&page=${page}`;
 	const auth = {
 		username: process.env.REACT_APP_USERNAME || '',
 		apiKey: process.env.REACT_APP_API_KEY || '',
