@@ -7,7 +7,9 @@ import { SiteContext } from './contexts/SiteContext';
 
 ReactDOM.render(
 	<React.StrictMode>
-		<SiteContext.Provider value={'zccandriib'}>
+		<SiteContext.Provider
+			value={process.env.REACT_APP_SITE_NAME || 'zccandriib'}
+		>
 			<App />
 		</SiteContext.Provider>
 	</React.StrictMode>,
