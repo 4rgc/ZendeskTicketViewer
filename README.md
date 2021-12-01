@@ -17,6 +17,7 @@ To run Zendesk Ticket Viewer on your local machine, you need to follow these ste
 5. Add your Zendesk login credentials to the file, each on new line:
    1. Add your username: `REACT_APP_USERNAME=your_username`
    2. Add your API token: `REACT_APP_API_KEY=your_apitoken`
+   3. Add your site name: `REACT_APP_SITE_NAME=your_sitename`
 6. Done!
    - To run the app in development mode: `npm start`
    - To run storybook: `npm run storybook`
