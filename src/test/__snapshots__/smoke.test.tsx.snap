@@ -54,21 +54,5 @@ exports[`App smoke test opens up 1`] = `
       />
     </table>
   </div>
-  <div
-    className="paging-cont"
-  >
-    <button
-      className="btn-base btn-prm btn-sq btn-dis paging-btn"
-      onClick={[Function]}
-    >
-      &lt;
-    </button>
-    <button
-      className="btn-base btn-prm btn-sq btn-dis paging-btn"
-      onClick={[Function]}
-    >
-      &gt;
-    </button>
-  </div>
 </div>
 `;

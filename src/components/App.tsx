@@ -87,7 +87,7 @@ function App() {
 					onRowClick={onRowClick}
 				/>
 			</div>
-			{!error ? (
+			{pageCount > 1 ? (
 				<Paging
 					size="small"
 					page={page}
