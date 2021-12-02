@@ -1,0 +1,10 @@
+.paged-table-container {
+	overflow-y: scroll;
+	flex: 1;
+}
+
+.table-container {
+	flex: 1;
+	padding: 20px;
+	align-items: center;
+}
