@@ -9,10 +9,3 @@
 .App-link {
 	color: #61dafb;
 }
-
-.table-container {
-	flex: 1;
-	overflow-y: scroll;
-	padding: 20px;
-	align-items: center;
-}
