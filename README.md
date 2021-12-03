@@ -26,5 +26,7 @@ To run Zendesk Ticket Viewer on your local machine, you need to follow these ste
 
 ## Using local API Client
 
+Make sure to set the port of the API Client to 3005.
+
 To use the locally deployed API Client, add the following line to your `.env` file:
 `REACT_APP_USE_LOCAL_API=true`
