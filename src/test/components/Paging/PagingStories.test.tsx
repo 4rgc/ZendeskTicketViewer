@@ -7,9 +7,9 @@ import {
 	TenPage,
 	SevenPageWithPrevNext,
 	SevenPageOnLast,
-} from '../../components/Paging/Paging.stories';
+} from '../../../components/Paging/Paging.stories';
 import { render } from 'enzyme';
-import { PagingProps } from '../../components/Paging/Paging';
+import { PagingProps } from '../../../components/Paging/Paging';
 
 describe('Paging story tests', () => {
 	it('should render one page Paging', () => {

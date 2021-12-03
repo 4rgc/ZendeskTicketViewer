@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import { Paging, PagingProps } from '../../components/Paging/Paging';
+import { Paging, PagingProps } from '../../../components/Paging/Paging';
 
 describe('Paging tests', () => {
 	const defaultArgs: PagingProps = {

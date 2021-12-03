@@ -1,5 +1,5 @@
 import { render } from 'enzyme';
-import { ErrorView } from '../../components/ErrorView/ErrorView';
+import { ErrorView } from '../../../components/ErrorView/ErrorView';
 
 describe('ErrorView tests', () => {
 	it('should render the message as an error', () => {

@@ -1,6 +1,6 @@
-import { TicketDetails } from '../../components/TicketDetails/TicketDetails';
+import { TicketDetails } from '../../../components/TicketDetails/TicketDetails';
 import { shallow } from 'enzyme';
-import { ZendeskTicket } from '../../types/ZendeskTicket';
+import { ZendeskTicket } from '../../../types/ZendeskTicket';
 import React from 'react';
 
 const mockTicket: ZendeskTicket = {

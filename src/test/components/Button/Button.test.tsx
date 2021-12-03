@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import { Button } from '../../components/Button/Button';
+import { Button } from '../../../components/Button/Button';
 
 describe('Button behavioral tests', () => {
 	it('should call the onClick method passed in', () => {

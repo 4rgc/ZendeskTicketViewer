@@ -1,9 +1,9 @@
 import PagedTable, {
 	PagedTableProps,
-} from '../../components/PagedTable/PagedTable';
+} from '../../../components/PagedTable/PagedTable';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { Column } from 'react-table';
-import { Paging, PagingProps } from '../../components/Paging/Paging';
+import { Paging, PagingProps } from '../../../components/Paging/Paging';
 
 type MockDataType = { hello: number; world: number };
 

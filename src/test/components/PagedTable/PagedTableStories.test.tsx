@@ -5,9 +5,9 @@ import {
 	FivePageTableLarge,
 	TenPageTable,
 	TenPageTableLarge,
-} from '../../components/PagedTable/PagedTable.stories';
+} from '../../../components/PagedTable/PagedTable.stories';
 import { render } from 'enzyme';
-import { PagedTableProps } from '../../components/PagedTable/PagedTable';
+import { PagedTableProps } from '../../../components/PagedTable/PagedTable';
 
 describe('PagedTable story tests', () => {
 	it('should render the one page table story', () => {

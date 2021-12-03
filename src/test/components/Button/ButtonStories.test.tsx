@@ -7,7 +7,7 @@ import {
 	Primary,
 	Secondary,
 	Disabled,
-} from '../../components/Button/Button.stories';
+} from '../../../components/Button/Button.stories';
 import renderer from 'react-test-renderer';
 
 describe('Button Story regression tests', () => {

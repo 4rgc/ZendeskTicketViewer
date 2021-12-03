@@ -1,9 +1,9 @@
 import {
 	Empty,
 	Normal,
-} from '../../components/TicketDetails/TicketDetails.stories';
+} from '../../../components/TicketDetails/TicketDetails.stories';
 import { render } from 'enzyme';
-import { TicketDetailsProps } from '../../components/TicketDetails/TicketDetails';
+import { TicketDetailsProps } from '../../../components/TicketDetails/TicketDetails';
 
 describe('TicketDetails story tests', () => {
 	it('should render an Empty TicketDetails story', () => {

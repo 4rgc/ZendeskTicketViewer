@@ -4,9 +4,9 @@ import {
 	OneRow,
 	TenRows,
 	FiveRowsWithClickHandler,
-} from '../../components/Table/Table.stories';
+} from '../../../components/Table/Table.stories';
 import { render } from 'enzyme';
-import { TableProps } from '../../components/Table/Table';
+import { TableProps } from '../../../components/Table/Table';
 
 describe('Table story tests', () => {
 	it('should render an empty table story', () => {
