@@ -44,9 +44,6 @@ const useZendeskAPI: (
 			case 500:
 				msg = `There was a server-side error: ${error.message}. ${error.info?.error}`;
 				break;
-			case undefined:
-				msg = 'Something weird happened. Please contact support.';
-				break;
 			default:
 				msg = `Error ${error?.status}: ${error?.message}. ${error?.info?.error}`;
 		}
