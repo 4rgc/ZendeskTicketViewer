@@ -16,7 +16,7 @@ describe('useZendeskAPI hook tests', () => {
 		process.env = originalEnv;
 	});
 
-	it("should return an error if there's an useSWR error", async () => {
+	it("should return a readable error if there's a 500 error", async () => {
 		jest.spyOn(hooks, 'default').mockImplementation((url, fetcher) => ({
 			error: { status: 500, message: 'Unknown server error' },
 			mutate: () => new Promise(() => {}),
@@ -25,7 +25,43 @@ describe('useZendeskAPI hook tests', () => {
 
 		const { result } = renderHook(() => useZendeskAPI(1, 1));
 		expect(result.current[0]).toBeUndefined();
-		expect(result.current[1]).not.toBe('');
+		expect(result.current[1]).toMatch(/server error/i);
+	});
+
+	it("should return a readable error if there's a 404 error", async () => {
+		jest.spyOn(hooks, 'default').mockImplementation((url, fetcher) => ({
+			error: { status: 404, message: 'Not found' },
+			mutate: () => new Promise(() => {}),
+			isValidating: false,
+		}));
+
+		const { result } = renderHook(() => useZendeskAPI(1, 1));
+		expect(result.current[0]).toBeUndefined();
+		expect(result.current[1]).toMatch(/site not found/i);
+	});
+
+	it("should return a readable error if there's a 401 error", async () => {
+		jest.spyOn(hooks, 'default').mockImplementation((url, fetcher) => ({
+			error: { status: 401, message: 'Not Authorized' },
+			mutate: () => new Promise(() => {}),
+			isValidating: false,
+		}));
+
+		const { result } = renderHook(() => useZendeskAPI(1, 1));
+		expect(result.current[0]).toBeUndefined();
+		expect(result.current[1]).toMatch(/could not authenticate/i);
+	});
+
+	it("should return an error if there's any other error", async () => {
+		jest.spyOn(hooks, 'default').mockImplementation((url, fetcher) => ({
+			error: { status: 503, message: 'Bad gateway' },
+			mutate: () => new Promise(() => {}),
+			isValidating: false,
+		}));
+
+		const { result } = renderHook(() => useZendeskAPI(1, 1));
+		expect(result.current[0]).toBeUndefined();
+		expect(result.current[1]).toMatch(/bad gateway/i);
 	});
 
 	it("should return an error if there's an error prop in the data", () => {
