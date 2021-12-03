@@ -32,11 +32,30 @@ const useZendeskAPI: (
 		fetcherWithAuth
 	);
 
+	const getDisplayErrorMessage = (error: FetcherError | undefined) => {
+		let msg = '';
+		switch (error?.status) {
+			case 404:
+				msg = 'Error 404: Site not found.';
+				break;
+			case 401:
+				msg = 'Error 401: Could not authenticate the user.';
+				break;
+			case 500:
+				msg = `There was a server-side error: ${error.message}. ${error.info?.error}`;
+				break;
+			case undefined:
+				msg = 'Something weird happened. Please contact support.';
+				break;
+			default:
+				msg = `Error ${error?.status}: ${error?.message}. ${error?.info?.error}`;
+		}
+		return msg;
+	};
+
 	useEffect(() => {
 		if (error) {
-			setApiError(
-				`${error.status}: ${error.message}. ${error.info?.error}`
-			);
+			setApiError(getDisplayErrorMessage(error));
 		} else {
 			setApiError('');
 		}
